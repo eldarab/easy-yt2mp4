@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Unit tests
+        shell: powershell
+        run: .\tests\Unit.Tests.ps1
+
+      - name: Build release zip
+        shell: powershell
+        run: .\tools\Build-Release.ps1 -Version $env:GITHUB_REF_NAME
+
+      - name: Publish GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes=$(awk -v v="${GITHUB_REF_NAME#v}" '$0 ~ "^## \\[?"v {f=1; next} /^## / {f=0} f' CHANGELOG.md)
+          gh release create "$GITHUB_REF_NAME" dist/easy-yt2mp4.zip \
+            --title "$GITHUB_REF_NAME" --notes "${notes:-See CHANGELOG.md}"
