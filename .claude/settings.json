@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Unit.Tests.ps1)",
+      "Bash(powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/Integration.Tests.ps1)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh release view:*)"
+    ]
+  }
+}

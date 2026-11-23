@@ -1,9 +1,15 @@
 # Development
 
-Plain Windows PowerShell 5.1, no build step and no modules.
+Plain Windows PowerShell 5.1, no build step and no modules. The workflow for a new user story is in
+[CLAUDE.md](../CLAUDE.md); this page is the reference.
 
 | Path | What it is |
 | --- | --- |
+| `CLAUDE.md` | Start here: product rules, workflow, pitfalls |
+| `docs/specs/` | Approved user stories (`US-NNN-*.md`) and `TEMPLATE.md` |
+| `docs/decisions/` | Calls made while building each story |
+| `docs/architecture.md` | How the app works and which test covers which scenario |
+| `.github/` | CI and release workflows, PR and issue templates |
 | `src/SaveYouTubeVideo.ps1` | The app the desktop icon runs |
 | `src/EasyYt2Mp4.ps1` | All the app's functions and the approved wording |
 | `install.ps1`, `uninstall.ps1` | The one-line install and removal scripts |
@@ -28,11 +34,13 @@ Ruth never sets any of them.
 
 ## Releasing
 
-1. Merge the change to `main` through a pull request.
-2. Add a section for the new version at the top of `CHANGELOG.md` (`## 1.2.3`).
-3. Tag and push: `git tag -a v1.2.3 -m "v1.2.3"` then `git push origin v1.2.3`.
+1. In the pull request, add a section for the new version at the top of `CHANGELOG.md` (`## 1.2.3`).
+   Semver: new behaviour is a minor bump, a fix is a patch. Docs-only changes need no release.
+2. Squash-merge the pull request once CI is green.
+3. On an up-to-date `main`, tag and push: `git tag -a v1.2.3 -m "v1.2.3"` then `git push origin v1.2.3`.
 
-The Release workflow runs the unit tests, builds `easy-yt2mp4.zip` and publishes the GitHub release.
+The Release workflow runs the unit tests, builds `easy-yt2mp4.zip` and publishes the GitHub release with
+that version's changelog section as its notes.
 `install.ps1` always installs the latest release, so running the install command again updates the app.
 
 ## Exit codes
