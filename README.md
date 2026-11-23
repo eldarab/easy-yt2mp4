@@ -23,7 +23,9 @@ When it's done, the Videos folder opens with the new video selected. The first t
 
 ---
 
-More: [manual test checklist](docs/manual-test-checklist.md) · [development](docs/development.md) · [changelog](CHANGELOG.md) · uninstall with
+**Developing it?** Start with [CLAUDE.md](CLAUDE.md): product rules, how to add a user story, and where everything is.
+
+More: [manual test checklist](docs/manual-test-checklist.md) · [changelog](CHANGELOG.md) · uninstall with
 `irm https://raw.githubusercontent.com/eldarab/easy-yt2mp4/main/uninstall.ps1 | iex`
 
 Built on [yt-dlp](https://github.com/yt-dlp/yt-dlp) (Unlicense), [FFmpeg](https://ffmpeg.org) (GPL, [yt-dlp builds](https://github.com/yt-dlp/FFmpeg-Builds)) and [Deno](https://deno.com) (MIT), which the app downloads on first run. MIT licensed.
